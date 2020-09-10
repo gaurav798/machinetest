@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:0 auto;
+            padding:20px;
+        }
+
+        .img_area {
+            position: relative;
+            border:1px solid;
+            width:200px;
+            float:left;
+        }
+        .del_btn{
+            position: absolute;
+            top:0px;
+            right:0px;
+            width:20px;
+            height:20px;
+        }
+        .del_btn img{
+            width:20px;
+            height:auto;
+            cursor:pointer  
+        }
+        
+    </style>
+    <script>
+       
+        var xhr= new XMLHttpRequest();
+        xhr.open("get","https://jsonplaceholder.typicode.com/photos",true);
+        xhr.onload=function(){
+            var data=JSON.parse(xhr.responseText);
+            console.log(data)
+            var str = '<div style="width:100%">';
+            for(var i=0; i<9;i++){
+                str += '<div class="img_area" id="div'+i+'"> <img src="'+data[i].thumbnailUrl+'" /><div class="img-text">PROJECT NAME </div><div class="img-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur iusto laborum debitis in natus reiciendis ratione excepturi officia, illum blanditiis!</div><div class="del_btn" onclick="closediv('+i+')"><img src="del_btn.jpg" /></div></div>'
+            }
+            str += '</div>'
+            document.getElementById("show").innerHTML = str;
+        };
+        xhr.send();
+
+        function closediv(id){
+            document.getElementById('div'+id).style.display =  'none'
+        }
+         
+    </script>
+</head>
+<body>
+    
+
+    <div id="show"></div>
+    
+</body>
+</html>
